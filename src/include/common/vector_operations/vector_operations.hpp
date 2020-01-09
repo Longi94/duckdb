@@ -205,6 +205,10 @@ struct VectorOperations {
 	static void CombineHash(Vector &hashes, Vector &B);
 
 	//===--------------------------------------------------------------------===//
+	// Checksum functions
+	//===--------------------------------------------------------------------===//
+	static Value ChecksumXor(Vector &vector);
+	//===--------------------------------------------------------------------===//
 	// Generate functions
 	//===--------------------------------------------------------------------===//
 	static void GenerateSequence(Vector &result, int64_t start = 0, int64_t increment = 1);

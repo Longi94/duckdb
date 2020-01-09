@@ -51,6 +51,8 @@ public:
 	//! The selection vector of a chunk, if it owns it
 	sel_t owned_sel_vector[STANDARD_VECTOR_SIZE];
 
+	vector<Value> edc;
+
 public:
 	index_t size() {
 		if (column_count == 0) {
@@ -124,6 +126,12 @@ public:
 	//! Verify that the DataChunk is in a consistent, not corrupt state. DEBUG
 	//! FUNCTION ONLY!
 	void Verify();
+
+	//! Compute error detecting codes.
+	void ComputeEdc();
+
+	//! Verify error detecting codes.
+	void VerifyEdc();
 
 private:
 	//! The data owned by this DataChunk. This data is typically referenced by

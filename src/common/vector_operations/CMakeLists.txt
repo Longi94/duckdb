@@ -4,6 +4,7 @@ add_library_unity(duckdb_vector_operations
                   append.cpp
                   boolean_operators.cpp
                   cast_operators.cpp
+                  checksum.cpp
                   comparison_operators.cpp
                   copy.cpp
                   generators.cpp

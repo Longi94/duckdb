@@ -282,3 +282,19 @@ void DataChunk::Verify() {
 void DataChunk::Print() {
 	Printer::Print(ToString());
 }
+
+void DataChunk::ComputeEdc() {
+	edc.clear();
+	for (index_t i = 0; i < column_count; i++) {
+		edc.push_back(VectorOperations::ChecksumXor(data[i]));
+	}
+}
+
+void DataChunk::VerifyEdc() {
+	for (index_t i = 0; i < column_count; i++) {
+		auto val = VectorOperations::ChecksumXor(data[i]);
+		if (val != edc[i]) {
+			throw Exception("Intermediate verification failed");
+		}
+	}
+}
