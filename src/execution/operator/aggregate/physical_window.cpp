@@ -507,7 +507,6 @@ void PhysicalWindow::GetChunkInternal(ClientContext &context, DataChunk &chunk, 
 	state->position += STANDARD_VECTOR_SIZE;
 
 	big_data.VerifyEdc();
-	window_results.VerifyEdc();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalWindow::GetOperatorState() {
