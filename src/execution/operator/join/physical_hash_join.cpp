@@ -40,8 +40,6 @@ void PhysicalHashJoin::GetChunkInternal(ClientContext &context, DataChunk &chunk
 			}
 			// build the HT
 			hash_table->Build(state->join_keys, right_chunk);
-
-			right_chunk.VerifyEdc();
 		}
 
 		if (hash_table->size() == 0 &&

@@ -264,7 +264,6 @@ void PhysicalNestedLoopJoin::GetChunkInternal(ClientContext &context, DataChunk 
 	} while (chunk.size() == 0);
 
 	state->right_data.VerifyEdc();
-	state->right_chunks.VerifyEdc();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalNestedLoopJoin::GetOperatorState() {

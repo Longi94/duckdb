@@ -69,7 +69,6 @@ void PhysicalCrossProduct::GetChunkInternal(ClientContext &context, DataChunk &c
 		}
 	}
 
-	left_chunk.VerifyEdc();
 	state->right_data.VerifyEdc();
 }
 
