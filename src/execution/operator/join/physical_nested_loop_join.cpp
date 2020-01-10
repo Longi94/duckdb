@@ -145,9 +145,9 @@ void PhysicalNestedLoopJoin::GetChunkInternal(ClientContext &context, DataChunk 
 		} else {
 			throw Exception("Unhandled type for empty NL join");
 		}
+		state->child_chunk.VerifyEdc();
 		return;
 	}
-	state->child_chunk.VerifyEdc();
 
 	if (state->right_chunk >= state->right_chunks.chunks.size()) {
 		return;
