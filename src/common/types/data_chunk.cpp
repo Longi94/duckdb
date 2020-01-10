@@ -293,6 +293,7 @@ void DataChunk::ComputeEdc() {
 }
 
 void DataChunk::VerifyEdc() {
+	assert(edc.size() == column_count);
 	for (index_t i = 0; i < column_count; i++) {
 		auto val = VectorOperations::ChecksumXor(data[i]);
 		assert(val == edc[i]);
