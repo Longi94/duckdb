@@ -17,4 +17,6 @@ void PhysicalPruneColumns::GetChunkInternal(ClientContext &context, DataChunk &c
 		chunk.data[i].Reference(state->child_chunk.data[i]);
 	}
 	chunk.sel_vector = state->child_chunk.sel_vector;
+
+	state->child_chunk.VerifyEdc();
 }

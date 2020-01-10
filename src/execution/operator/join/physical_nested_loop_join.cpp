@@ -147,6 +147,7 @@ void PhysicalNestedLoopJoin::GetChunkInternal(ClientContext &context, DataChunk 
 		}
 		return;
 	}
+	state->child_chunk.VerifyEdc();
 
 	if (state->right_chunk >= state->right_chunks.chunks.size()) {
 		return;
@@ -179,6 +180,7 @@ void PhysicalNestedLoopJoin::GetChunkInternal(ClientContext &context, DataChunk 
 						// with a NULL marker!
 						RemoveNullValues(state->left_join_condition);
 					}
+					state->child_chunk.VerifyEdc();
 				} while (state->left_join_condition.size() == 0);
 
 				state->right_chunk = 0;
@@ -257,7 +259,12 @@ void PhysicalNestedLoopJoin::GetChunkInternal(ClientContext &context, DataChunk 
 		default:
 			throw NotImplementedException("Unimplemented type for nested loop join!");
 		}
+
+		left_chunk.VerifyEdc();
 	} while (chunk.size() == 0);
+
+	state->right_data.VerifyEdc();
+	state->right_chunks.VerifyEdc();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalNestedLoopJoin::GetOperatorState() {

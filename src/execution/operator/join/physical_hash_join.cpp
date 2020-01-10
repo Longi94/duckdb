@@ -40,6 +40,8 @@ void PhysicalHashJoin::GetChunkInternal(ClientContext &context, DataChunk &chunk
 			}
 			// build the HT
 			hash_table->Build(state->join_keys, right_chunk);
+
+			right_chunk.VerifyEdc();
 		}
 
 		if (hash_table->size() == 0 &&
@@ -114,6 +116,8 @@ void PhysicalHashJoin::GetChunkInternal(ClientContext &context, DataChunk &chunk
 		// perform the actual probe
 		state->scan_structure = hash_table->Probe(state->join_keys);
 		state->scan_structure->Next(state->join_keys, state->child_chunk, chunk);
+
+		state->child_chunk.VerifyEdc();
 	} while (chunk.size() == 0);
 }
 

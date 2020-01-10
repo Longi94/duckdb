@@ -61,6 +61,7 @@ void PhysicalTopN::GetChunkInternal(ClientContext &context, DataChunk &chunk, Ph
 	}
 
 	state->position += big_data.MaterializeHeapChunk(chunk, state->heap.get(), state->position, heap_size);
+	big_data.VerifyEdc();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalTopN::GetOperatorState() {

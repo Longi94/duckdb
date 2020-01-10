@@ -176,7 +176,11 @@ void PhysicalPiecewiseMergeJoin::GetChunkInternal(ClientContext &context, DataCh
 		default:
 			throw NotImplementedException("Unimplemented join type for merge join");
 		}
+		state->child_chunk.VerifyEdc();
 	} while (chunk.size() == 0);
+
+	state->right_chunks.VerifyEdc();
+	state->right_conditions.VerifyEdc();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalPiecewiseMergeJoin::GetOperatorState() {

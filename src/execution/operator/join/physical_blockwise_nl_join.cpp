@@ -77,6 +77,8 @@ void PhysicalBlockwiseNLJoin::GetChunkInternal(ClientContext &context, DataChunk
 				VectorOperations::Set(chunk.data[i], Value());
 			}
 		}
+
+		state->child_chunk.VerifyEdc();
 		return;
 	}
 
@@ -193,7 +195,10 @@ void PhysicalBlockwiseNLJoin::GetChunkInternal(ClientContext &context, DataChunk
 				state->left_position = 0;
 			}
 		}
+		state->child_chunk.VerifyEdc();
 	} while (result_count == 0);
+
+	state->right_chunks.VerifyEdc();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalBlockwiseNLJoin::GetOperatorState() {

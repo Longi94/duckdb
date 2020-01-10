@@ -68,6 +68,9 @@ void PhysicalCrossProduct::GetChunkInternal(ClientContext &context, DataChunk &c
 			children[0]->GetChunk(context, state->child_chunk, state->child_state.get());
 		}
 	}
+
+	left_chunk.VerifyEdc();
+	state->right_data.VerifyEdc();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalCrossProduct::GetOperatorState() {

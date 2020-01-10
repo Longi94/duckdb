@@ -57,6 +57,7 @@ void DataChunk::Reset() {
 		ptr += GetTypeIdSize(data[i].type) * STANDARD_VECTOR_SIZE;
 	}
 	sel_vector = nullptr;
+	edc.clear();
 }
 
 void DataChunk::Destroy() {
@@ -64,6 +65,7 @@ void DataChunk::Destroy() {
 	owned_data.reset();
 	sel_vector = nullptr;
 	column_count = 0;
+	edc.clear();
 }
 
 void DataChunk::Copy(DataChunk &other, index_t offset) {
@@ -293,8 +295,6 @@ void DataChunk::ComputeEdc() {
 void DataChunk::VerifyEdc() {
 	for (index_t i = 0; i < column_count; i++) {
 		auto val = VectorOperations::ChecksumXor(data[i]);
-		if (val != edc[i]) {
-			throw Exception("Intermediate verification failed");
-		}
+		assert(val == edc[i]);
 	}
 }

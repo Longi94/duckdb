@@ -441,3 +441,9 @@ index_t ChunkCollection::MaterializeHeapChunk(DataChunk &target, index_t order[]
 	target.Verify();
 	return remaining_data;
 }
+
+void ChunkCollection::VerifyEdc() {
+	for (int i = 0; i < count; ++i) {
+		chunks[i]->VerifyEdc();
+	}
+}

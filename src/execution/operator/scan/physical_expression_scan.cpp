@@ -25,6 +25,7 @@ void PhysicalExpressionScan::GetChunkInternal(ClientContext &context, DataChunk 
 	executor.Execute(expressions[state->expression_index], chunk);
 
 	state->expression_index++;
+	state->child_chunk.VerifyEdc();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalExpressionScan::GetOperatorState() {
