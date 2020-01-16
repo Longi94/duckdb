@@ -16,19 +16,6 @@ struct BitwiseXOR {
 	}
 };
 
-struct BitwiseFloatXOR
-{
-	template <class T> static inline T Operation(T left, T right) {
-		unsigned char *l = reinterpret_cast<unsigned char *>(&left);
-		unsigned char *r = reinterpret_cast<unsigned char *>(&right);
-
-		for (int i = 0; i < sizeof left; ++i) {
-			l[i] ^= r[i];
-		}
-		return left;
-	}
-};
-
 struct BitwiseAND {
 	template <class T> static inline T Operation(T left, T right) {
 		return left & right;
