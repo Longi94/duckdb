@@ -196,6 +196,7 @@ unique_ptr<QueryResult> ClientContext::ExecuteStatementInternal(string query, un
 		if (chunk->size() == 0) {
 			break;
 		}
+		result->collection.VerifyEdc();
 		result->collection.Append(*chunk);
 	}
 	return move(result);
