@@ -296,6 +296,17 @@ void DataChunk::VerifyEdc() {
 	assert(edc.size() == column_count);
 	for (index_t i = 0; i < column_count; i++) {
 		auto val = VectorOperations::ChecksumXor(data[i]);
-		assert(val == edc[i]);
+
+		switch (val.type) {
+		case TypeId::DOUBLE:
+			assert(isnan(val.value_.double_) && isnan(val.value_.double_) || val == edc[i]);
+			break;
+		case TypeId::FLOAT:
+			assert(isnan(val.value_.float_) && isnan(val.value_.float_) || val == edc[i]);
+			break;
+		default:
+			assert(val == edc[i]);
+			break;
+		}
 	}
 }
