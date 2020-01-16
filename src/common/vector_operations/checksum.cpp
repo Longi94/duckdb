@@ -38,11 +38,11 @@ Value VectorOperations::ChecksumXor(Vector &input) {
 		break;
 	case TypeId::FLOAT:
 		result = Value::FLOAT(0);
-		// templated_unary_fold<float, float, duckdb::BitwiseXOR>(input, &result.value_.float_);
+		templated_unary_fold<float, float, duckdb::BitwiseFloatXOR>(input, &result.value_.float_);
 		break;
 	case TypeId::DOUBLE:
 		result = Value::DOUBLE(0);
-		// templated_unary_fold<double, double, duckdb::BitwiseXOR>(input, &result.value_.double_);
+		templated_unary_fold<double, double, duckdb::BitwiseFloatXOR>(input, &result.value_.double_);
 		break;
 	default:
 		break;
