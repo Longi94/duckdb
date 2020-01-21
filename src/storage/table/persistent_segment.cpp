@@ -5,6 +5,7 @@
 #include "common/types/null_value.hpp"
 #include "storage/checkpoint/table_data_writer.hpp"
 #include "storage/meta_block_reader.hpp"
+#include "common/checksum.hpp"
 
 using namespace duckdb;
 using namespace std;
@@ -45,6 +46,8 @@ void PersistentSegment::Scan(ColumnPointer &pointer, Vector &result, index_t cou
 	source.count = count;
 	AppendFromStorage(source, result, stats.has_null);
 	pointer.offset += count;
+
+	block->VerifyChecksum();
 }
 
 void PersistentSegment::Scan(ColumnPointer &pointer, Vector &result, index_t count, sel_t *sel_vector,

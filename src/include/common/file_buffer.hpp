@@ -40,6 +40,8 @@ public:
 
 	void Clear();
 
+	void VerifyChecksum();
+
 private:
 	//! The pointer to the internal buffer that will be read or written, including the buffer header
 	data_ptr_t internal_buffer;
