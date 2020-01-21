@@ -18,5 +18,5 @@ void PhysicalPruneColumns::GetChunkInternal(ClientContext &context, DataChunk &c
 	}
 	chunk.sel_vector = state->child_chunk.sel_vector;
 
-	state->child_chunk.VerifyEdc();
+	state->child_chunk.VerifyChecksums();
 }

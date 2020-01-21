@@ -69,7 +69,7 @@ void PhysicalCrossProduct::GetChunkInternal(ClientContext &context, DataChunk &c
 		}
 	}
 
-	state->right_data.VerifyEdc();
+	state->right_data.VerifyChecksums();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalCrossProduct::GetOperatorState() {

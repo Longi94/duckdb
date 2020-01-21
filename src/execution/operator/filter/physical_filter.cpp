@@ -27,7 +27,7 @@ void PhysicalFilter::GetChunkInternal(ClientContext &context, DataChunk &chunk, 
 		}
 		chunk.SetSelectionVector(result);
 
-		state->child_chunk.VerifyEdc();
+		state->child_chunk.VerifyChecksums();
 	} while (chunk.size() == 0);
 }
 

@@ -55,7 +55,7 @@ void PhysicalOrder::GetChunkInternal(ClientContext &context, DataChunk &chunk, P
 	big_data.MaterializeSortedChunk(chunk, state->sorted_vector.get(), state->position);
 	state->position += STANDARD_VECTOR_SIZE;
 
-	big_data.VerifyEdc();
+	big_data.VerifyChecksums();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalOrder::GetOperatorState() {

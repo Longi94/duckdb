@@ -115,7 +115,7 @@ void PhysicalHashJoin::GetChunkInternal(ClientContext &context, DataChunk &chunk
 		state->scan_structure = hash_table->Probe(state->join_keys);
 		state->scan_structure->Next(state->join_keys, state->child_chunk, chunk);
 
-		state->child_chunk.VerifyEdc();
+		state->child_chunk.VerifyChecksums();
 	} while (chunk.size() == 0);
 }
 

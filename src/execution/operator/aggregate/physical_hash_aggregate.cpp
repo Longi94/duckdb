@@ -77,7 +77,7 @@ void PhysicalHashAggregate::GetChunkInternal(ClientContext &context, DataChunk &
 		state->ht->AddChunk(group_chunk, payload_chunk);
 		state->tuples_scanned += state->child_chunk.size();
 
-		state->child_chunk.VerifyEdc();
+		state->child_chunk.VerifyChecksums();
 	} while (state->child_chunk.size() > 0);
 
 	state->group_chunk.Reset();

@@ -52,8 +52,8 @@ void PhysicalDelimJoin::GetChunkInternal(ClientContext &context, DataChunk &chun
 	// now pull from the RHS from the underlying join
 	join->GetChunk(context, chunk, state->join_state.get());
 
-	lhs_data.VerifyEdc();
-	delim_data.VerifyEdc();
+	lhs_data.VerifyChecksums();
+	delim_data.VerifyChecksums();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalDelimJoin::GetOperatorState() {

@@ -46,7 +46,7 @@ void PhysicalSimpleAggregate::GetChunkInternal(ClientContext &context, DataChunk
 			payload_idx += payload_cnt;
 		}
 
-		state->child_chunk.VerifyEdc();
+		state->child_chunk.VerifyChecksums();
 	}
 	// initialize the result chunk with the aggregate values
 	for (index_t aggr_idx = 0; aggr_idx < aggregates.size(); aggr_idx++) {

@@ -51,7 +51,7 @@ public:
 	//! The selection vector of a chunk, if it owns it
 	sel_t owned_sel_vector[STANDARD_VECTOR_SIZE];
 
-	vector<Value> edc;
+	vector<Value> checksums;
 
 public:
 	index_t size() {
@@ -128,10 +128,10 @@ public:
 	void Verify();
 
 	//! Compute error detecting codes.
-	void ComputeEdc();
+	void ComputeChecksums();
 
 	//! Verify error detecting codes.
-	void VerifyEdc();
+	void VerifyChecksums();
 
 private:
 	//! The data owned by this DataChunk. This data is typically referenced by

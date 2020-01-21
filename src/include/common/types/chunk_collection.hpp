@@ -79,6 +79,6 @@ public:
 	index_t MaterializeHeapChunk(DataChunk &target, index_t order[], index_t start_offset, index_t heap_size) ;
 
 	//! Verify all the chunks for content integrity
-	void VerifyEdc();
+	void VerifyChecksums();
 };
 } // namespace duckdb

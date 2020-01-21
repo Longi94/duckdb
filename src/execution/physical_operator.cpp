@@ -45,7 +45,7 @@ void PhysicalOperator::GetChunk(ClientContext &context, DataChunk &chunk, Physic
 	GetChunkInternal(context, chunk, state);
 	context.profiler.EndOperator(chunk);
 
-	chunk.ComputeEdc();
+	chunk.ComputeChecksums();
 	chunk.Verify();
 }
 

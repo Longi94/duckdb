@@ -145,7 +145,7 @@ void PhysicalNestedLoopJoin::GetChunkInternal(ClientContext &context, DataChunk 
 		} else {
 			throw Exception("Unhandled type for empty NL join");
 		}
-		state->child_chunk.VerifyEdc();
+		state->child_chunk.VerifyChecksums();
 		return;
 	}
 
@@ -180,7 +180,7 @@ void PhysicalNestedLoopJoin::GetChunkInternal(ClientContext &context, DataChunk 
 						// with a NULL marker!
 						RemoveNullValues(state->left_join_condition);
 					}
-					state->child_chunk.VerifyEdc();
+					state->child_chunk.VerifyChecksums();
 				} while (state->left_join_condition.size() == 0);
 
 				state->right_chunk = 0;
@@ -260,10 +260,10 @@ void PhysicalNestedLoopJoin::GetChunkInternal(ClientContext &context, DataChunk 
 			throw NotImplementedException("Unimplemented type for nested loop join!");
 		}
 
-		left_chunk.VerifyEdc();
+		left_chunk.VerifyChecksums();
 	} while (chunk.size() == 0);
 
-	state->right_data.VerifyEdc();
+	state->right_data.VerifyChecksums();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalNestedLoopJoin::GetOperatorState() {

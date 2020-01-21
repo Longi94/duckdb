@@ -50,7 +50,7 @@ void ChunkCollection::Append(DataChunk &new_chunk) {
 				new_chunk.data[c].count = old_count;
 			}
 			offset = added_data;
-			last_chunk.ComputeEdc();
+			last_chunk.ComputeChecksums();
 		}
 	}
 
@@ -59,7 +59,7 @@ void ChunkCollection::Append(DataChunk &new_chunk) {
 		auto chunk = make_unique<DataChunk>();
 		chunk->Initialize(types);
 		new_chunk.Copy(*chunk, offset);
-		chunk->ComputeEdc();
+		chunk->ComputeChecksums();
 		chunks.push_back(move(chunk));
 	}
 }
@@ -444,8 +444,8 @@ index_t ChunkCollection::MaterializeHeapChunk(DataChunk &target, index_t order[]
 	return remaining_data;
 }
 
-void ChunkCollection::VerifyEdc() {
+void ChunkCollection::VerifyChecksums() {
 	for (auto &chunk : chunks) {
-		chunk->VerifyEdc();
+		chunk->VerifyChecksums();
 	}
 }

@@ -51,7 +51,7 @@ void PhysicalLimit::GetChunkInternal(ClientContext &context, DataChunk &chunk, P
 
 	state->current_offset += state->child_chunk.size();
 
-	state->child_chunk.VerifyEdc();
+	state->child_chunk.VerifyChecksums();
 }
 
 unique_ptr<PhysicalOperatorState> PhysicalLimit::GetOperatorState() {

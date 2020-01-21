@@ -18,7 +18,7 @@ void PhysicalProjection::GetChunkInternal(ClientContext &context, DataChunk &chu
 	executor.Execute(select_list, chunk);
 
 	// Verify that the content of the chunk didn't change
-	state->child_chunk.VerifyEdc();
+	state->child_chunk.VerifyChecksums();
 }
 
 string PhysicalProjection::ExtraRenderInformation() const {

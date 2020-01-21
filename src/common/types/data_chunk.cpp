@@ -57,7 +57,7 @@ void DataChunk::Reset() {
 		ptr += GetTypeIdSize(data[i].type) * STANDARD_VECTOR_SIZE;
 	}
 	sel_vector = nullptr;
-	edc.clear();
+	checksums.clear();
 }
 
 void DataChunk::Destroy() {
@@ -65,7 +65,7 @@ void DataChunk::Destroy() {
 	owned_data.reset();
 	sel_vector = nullptr;
 	column_count = 0;
-	edc.clear();
+	checksums.clear();
 }
 
 void DataChunk::Copy(DataChunk &other, index_t offset) {
@@ -285,27 +285,27 @@ void DataChunk::Print() {
 	Printer::Print(ToString());
 }
 
-void DataChunk::ComputeEdc() {
-	edc.clear();
+void DataChunk::ComputeChecksums() {
+	checksums.clear();
 	for (index_t i = 0; i < column_count; i++) {
-		edc.push_back(VectorOperations::ChecksumXor(data[i]));
+		checksums.push_back(VectorOperations::ChecksumXor(data[i]));
 	}
 }
 
-void DataChunk::VerifyEdc() {
-	assert(edc.size() == column_count);
+void DataChunk::VerifyChecksums() {
+	assert(checksums.size() == column_count);
 	for (index_t i = 0; i < column_count; i++) {
 		auto val = VectorOperations::ChecksumXor(data[i]);
 
 		switch (val.type) {
 		case TypeId::DOUBLE:
-			assert(isnan(val.value_.double_) && isnan(val.value_.double_) || val == edc[i]);
+			assert(isnan(val.value_.double_) && isnan(val.value_.double_) || val == checksums[i]);
 			break;
 		case TypeId::FLOAT:
-			assert(isnan(val.value_.float_) && isnan(val.value_.float_) || val == edc[i]);
+			assert(isnan(val.value_.float_) && isnan(val.value_.float_) || val == checksums[i]);
 			break;
 		default:
-			assert(val == edc[i]);
+			assert(val == checksums[i]);
 			break;
 		}
 	}
