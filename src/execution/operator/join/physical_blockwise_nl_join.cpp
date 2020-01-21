@@ -132,7 +132,9 @@ void PhysicalBlockwiseNLJoin::GetChunkInternal(ClientContext &context, DataChunk
 					return;
 				}
 			}
+			state->child_chunk.VerifyChecksums();
 			state->child_chunk.Flatten();
+			state->child_chunk.ComputeChecksums();
 			state->left_position = 0;
 			state->right_position = 0;
 			if (state->lhs_found_match) {

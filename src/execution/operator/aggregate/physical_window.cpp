@@ -480,6 +480,7 @@ void PhysicalWindow::GetChunkInternal(ClientContext &context, DataChunk &chunk, 
 
 		assert(window_results.column_count() == select_list.size());
 		index_t window_output_idx = 0;
+		big_data.VerifyChecksums();
 		// we can have multiple window functions
 		for (index_t expr_idx = 0; expr_idx < select_list.size(); expr_idx++) {
 			assert(select_list[expr_idx]->GetExpressionClass() == ExpressionClass::BOUND_WINDOW);
@@ -487,6 +488,7 @@ void PhysicalWindow::GetChunkInternal(ClientContext &context, DataChunk &chunk, 
 			auto wexpr = reinterpret_cast<BoundWindowExpression *>(select_list[expr_idx].get());
 			ComputeWindowExpression(context, wexpr, big_data, window_results, window_output_idx++);
 		}
+		big_data.ComputeChecksums();
 	}
 
 	if (state->position >= big_data.count) {

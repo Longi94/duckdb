@@ -69,6 +69,7 @@ void PhysicalHashJoin::GetChunkInternal(ClientContext &context, DataChunk &chunk
 		}
 		// remove any selection vectors
 		state->child_chunk.Flatten();
+		state->child_chunk.ComputeChecksums();
 		if (hash_table->size() == 0) {
 			// empty hash table, special case
 			if (hash_table->join_type == JoinType::ANTI) {

@@ -449,3 +449,9 @@ void ChunkCollection::VerifyChecksums() {
 		chunk->VerifyChecksums();
 	}
 }
+
+void ChunkCollection::ComputeChecksums() {
+	for (auto &chunk : chunks) {
+		chunk->ComputeChecksums();
+	}
+}

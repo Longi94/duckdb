@@ -80,5 +80,6 @@ public:
 
 	//! Verify all the chunks for content integrity
 	void VerifyChecksums();
+	void ComputeChecksums();
 };
 } // namespace duckdb
