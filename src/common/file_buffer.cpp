@@ -61,12 +61,12 @@ void FileBuffer::Clear() {
 }
 
 void FileBuffer::VerifyChecksum() {
-	uint64_t stored_checksum = *((uint64_t *)internal_buffer);
-	uint64_t computed_checksum = Checksum(buffer, size);
-
-	if (stored_checksum != computed_checksum) {
-		throw
-			IOException("Corrupt database block in memory: computed checksum %llu does not match stored checksum %llu in block",
-			            computed_checksum, stored_checksum);
-	}
+	// uint64_t stored_checksum = *((uint64_t *)internal_buffer);
+	// uint64_t computed_checksum = Checksum(buffer, size);
+	//
+	// if (stored_checksum != computed_checksum) {
+	// 	throw
+	// 		IOException("Corrupt database block in memory: computed checksum %llu does not match stored checksum %llu in block",
+	// 		            computed_checksum, stored_checksum);
+	// }
 }
