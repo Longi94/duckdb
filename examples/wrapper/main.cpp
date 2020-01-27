@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
     
     while (getline(cin, line)) {
         query.append(line);
+        query.append(endl);
     }
     
 	auto result = con.Query(query);
