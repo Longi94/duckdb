@@ -7,24 +7,6 @@
 
 using namespace duckdb;
 using namespace std;
-using namespace chrono;
-
-void BenchmarkTPCH(int q) {
-	DuckDB db("tpc-h.duckdb");
-	Connection con(db);
-
-	auto query = tpch::get_query(q);
-
-	auto begin = steady_clock::now();
-	auto result = con.Query(query);
-	auto end = steady_clock::now();
-	cout << "Q" << q << ": " << duration_cast<nanoseconds>(end - begin).count() << "[ns]" << endl;
-
-	begin = steady_clock::now();
-	result = con.Query(query);
-	end = steady_clock::now();
-	cout << "Q" << q << ": " << duration_cast<nanoseconds>(end - begin).count() << "[ns]" << endl;
-}
 
 TEST_CASE("Test TPC-H SF0", "[tpch]") {
 	unique_ptr<QueryResult> result;
@@ -35,73 +17,6 @@ TEST_CASE("Test TPC-H SF0", "[tpch]") {
 	for (size_t i = 1; i <= 22; i++) {
 		REQUIRE_NO_FAIL(con.Query(tpch::get_query(i)));
 	}
-}
-
-TEST_CASE("Benchmark TPC-H 1", "[tpch-benchmark]") {
-	BenchmarkTPCH(1);
-}
-TEST_CASE("Benchmark TPC-H 2", "[tpch-benchmark]") {
-	BenchmarkTPCH(2);
-}
-TEST_CASE("Benchmark TPC-H 3", "[tpch-benchmark]") {
-	BenchmarkTPCH(3);
-}
-TEST_CASE("Benchmark TPC-H 4", "[tpch-benchmark]") {
-	BenchmarkTPCH(4);
-}
-TEST_CASE("Benchmark TPC-H 5", "[tpch-benchmark]") {
-	BenchmarkTPCH(5);
-}
-TEST_CASE("Benchmark TPC-H 6", "[tpch-benchmark]") {
-	BenchmarkTPCH(6);
-}
-TEST_CASE("Benchmark TPC-H 7", "[tpch-benchmark]") {
-	BenchmarkTPCH(7);
-}
-TEST_CASE("Benchmark TPC-H 8", "[tpch-benchmark]") {
-	BenchmarkTPCH(8);
-}
-TEST_CASE("Benchmark TPC-H 9", "[tpch-benchmark]") {
-	BenchmarkTPCH(9);
-}
-TEST_CASE("Benchmark TPC-H 10", "[tpch-benchmark]") {
-	BenchmarkTPCH(10);
-}
-TEST_CASE("Benchmark TPC-H 11", "[tpch-benchmark]") {
-	BenchmarkTPCH(11);
-}
-TEST_CASE("Benchmark TPC-H 12", "[tpch-benchmark]") {
-	BenchmarkTPCH(12);
-}
-TEST_CASE("Benchmark TPC-H 13", "[tpch-benchmark]") {
-	BenchmarkTPCH(13);
-}
-TEST_CASE("Benchmark TPC-H 14", "[tpch-benchmark]") {
-	BenchmarkTPCH(14);
-}
-TEST_CASE("Benchmark TPC-H 15", "[tpch-benchmark]") {
-	BenchmarkTPCH(15);
-}
-TEST_CASE("Benchmark TPC-H 16", "[tpch-benchmark]") {
-	BenchmarkTPCH(16);
-}
-TEST_CASE("Benchmark TPC-H 17", "[tpch-benchmark]") {
-	BenchmarkTPCH(17);
-}
-TEST_CASE("Benchmark TPC-H 18", "[tpch-benchmark]") {
-	BenchmarkTPCH(18);
-}
-TEST_CASE("Benchmark TPC-H 19", "[tpch-benchmark]") {
-	BenchmarkTPCH(19);
-}
-TEST_CASE("Benchmark TPC-H 20", "[tpch-benchmark]") {
-	BenchmarkTPCH(20);
-}
-TEST_CASE("Benchmark TPC-H 21", "[tpch-benchmark]") {
-	BenchmarkTPCH(21);
-}
-TEST_CASE("Benchmark TPC-H 22", "[tpch-benchmark]") {
-	BenchmarkTPCH(22);
 }
 
 TEST_CASE("Test TPC-H SF0.1", "[tpch][.]") {
