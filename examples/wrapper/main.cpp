@@ -20,5 +20,11 @@ int main(int argc, char *argv[]) {
     }
     
 	auto result = con.Query(query);
-    fprintf(stdout, "%s", result->ToString().c_str());
+	if (result.success) {
+		fprintf(stdout, "%s", result->ToString().c_str());
+		return 0;
+	} else {
+		fprintf(stderr, "%s", result->ToString().c_str());
+		return 1;
+	}
 }
