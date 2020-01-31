@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
     }
     
 	auto result = con.Query(query);
-	if (result.success) {
+	if (result->success) {
 		fprintf(stdout, "%s", result->ToString().c_str());
 		return 0;
 	} else {

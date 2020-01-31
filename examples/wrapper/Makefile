@@ -13,6 +13,3 @@ duckdb:
 main:
 	mkdir -p build
 	cd build && cmake .. && make
-	build/wrapper
-
-
